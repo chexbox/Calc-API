@@ -1,4 +1,3 @@
-
 function calc(in) {
   var cons = []; //stores constants
   var oper = []; //stores operators
@@ -12,6 +11,9 @@ function calc(in) {
       if (last == "number") {
         length += 1;
       } else {
+        if (last == "operator") {
+          
+        };
         length = 0;
         last = "number";
       };
