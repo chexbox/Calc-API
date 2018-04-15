@@ -12,7 +12,12 @@ function calc(in) {
         length += 1;
       } else {
         if (last == "operator") {
-          
+          oper.push(a.substring(a - ( length + 1), a - 1));
+          order.push("oper")
+        };
+        if (last == "variable") {
+          oper.push(a.substring(a - ( length + 1), a - 1));
+          order.push("var")
         };
         length = 0;
         last = "number";
