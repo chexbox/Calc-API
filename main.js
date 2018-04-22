@@ -37,4 +37,5 @@ function split(input) {
     };
     a += 1;
   };
+  return (out);
 };
