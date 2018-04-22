@@ -26,7 +26,7 @@ function split(input) {
       if (last == "variable") {
         length += 1;
       } else {
-        out[index] = {"value": input.substring(a - ( length + 1), a - 1)), "type": last};
+        out[index] = {"value": input.substring(a - ( length + 1), a - 1), "type": last};
         if (last == "operator") {
           out[index].p = "0"
         };
