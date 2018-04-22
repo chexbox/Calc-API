@@ -25,19 +25,19 @@ function spl(input) {
       };
     };
     if (variable.indexOf(input[a]) > -1) {
-      if (last == "variable") {
-        length += 1;
-      } else {
-        out[index] = {"value": input.substring(a - ( length + 1), a), "type": last};
-        if (last == "operator") {
-          out[index].p = "0"
-        };
-        index += 1;
-        length = 0;
-        last = "variable";
+      out[index] = {"value": input.substring(a - ( length + 1), a), "type": last};
+      if (last == "operator") {
+        out[index].p = "0"
       };
+      index += 1;
+      length = 0;
+      last = "variable";
     };
     a += 1;
+  };
+  out[index] = {"value": input.substring(a - ( length + 1), a), "type": last};
+  if (last == "operator") {
+    out[index].p = "0"
   };
   return (out);
 };
