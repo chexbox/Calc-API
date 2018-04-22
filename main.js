@@ -1,5 +1,5 @@
 // slightly based off https://github.com/joker314/bidmas-solver/
-function split(input) {
+function spl(input) {
   var cons = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."];
   var oper = ["+", "-", "*", "/", "(", ")", "|", "=", "^", ""];
   var variable = ["x", "y"]
