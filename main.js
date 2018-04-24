@@ -45,11 +45,11 @@ function spl(input) {
 
 function step(it) {
   let oprs = {
-    "+": function(a, b) {return a+b},
-    "-": function(a, b) {return a-b},
-    "*": function(a, b) {return a*b},
-    "/": function(a, b) {return a/b},
-    "^": function(a, b) {return Math.pow(a+b)}
+    "+": (a, b) => {return a+b},
+    "-": (a, b) => {return a-b},
+    "*": (a, b) => {return a*b},
+    "/": (a, b) => {return a/b},
+    "^": (a, b, Math) => {return Math.pow(a+b)}
   };
   let index = 1;
 };
