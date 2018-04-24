@@ -42,7 +42,7 @@ function spl(input) {
   };
   return (out);
 };
-};
+
 function step(it) {
   let oprs = {
     "+": function(a, b) {return a+b},
