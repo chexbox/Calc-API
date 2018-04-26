@@ -50,13 +50,14 @@ function step(it) {
     "-": function(a, b) {return a-b},
     "*": function(a, b) {return a*b},
     "/": function(a, b) {return a/b},
-    "^": function(a, b) {return this.Math.pow(a, b)}
+    "^": function(a, b) {return Math.pow(a, b)}
   };
   let index = 1;
-  let next;
-  let testing = 0;
-  let todo = 0;
-  while (testing && todo < 1) {
-    
+  let found = false;
+  while (found !== true) {
+    if (it[index].type == "operator") {
+      
+    };
+    index += 1;
   };
 };
