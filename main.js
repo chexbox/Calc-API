@@ -19,7 +19,7 @@ function spl(input) {
           out[index] = {"value": input.substring(a - ( length + 1), a), "type": last};
         };
         if (last == "operator") {
-          out[index].p = "0"
+          out[index].p = "0";
         };
         index += 1;
         length = 0;
@@ -29,7 +29,7 @@ function spl(input) {
     if (variable.indexOf(input[a]) > -1) {
       out[index] = {"value": input.substring(a - ( length + 1), a), "type": last};
       if (last == "operator") {
-        out[index].p = "0"
+        out[index].p = "0";
       };
       index += 1;
       length = 0;
@@ -37,14 +37,16 @@ function spl(input) {
     };
     a += 1;
   };
-  out[index] = {"value": input.substring(a - ( length + 1), a), "type": last};
+  out[index] = {"value": input.substring(a - (length + 1), a), "type": last};
   if (last == "operator") {
-    out[index].p = "0"
+    out[index].p = "0";
   };
+  out.l = index;
   return (out);
 };
 
-function step(it) {
+function step(inp) {
+  let it = inp; 
   let oprs = {
     "+": function(a, b) {return a+b},
     "-": function(a, b) {return a-b},
@@ -54,10 +56,21 @@ function step(it) {
   };
   let index = 1;
   let found = false;
+  let p;
+  let pindex;
   while (found !== true) {
-    if (it[index].type == "operator") {
-      
+    if (it[index].type == "operator" && it[index - 1].type !== "variable" && it[index + 1].type !== "variable") {
+      if (it[index].p > p) {
+        p = it[index].p;
+        pindex = index;
+      };
+    };
+    if (index == it.l) {
+      found = true;
     };
     index += 1;
   };
+  it[index].value == oprs[it[index].value](it[index-1]);
+  it[index-1].type = "dead";
+  it[index+1].type = "dead";
 };
