@@ -35,6 +35,18 @@ function spl(input) {
       length = 0;
       last = "variable";
     };
+    if (oper.indexOf(input[a]) > -1) {
+      if (last !== ""){
+        out[index] = {"value": input.substring(a - ( length + 1), a), "type": last};
+      };
+      if (last == "operator") {
+        out[index].p = "0";
+      };
+      index += 1;
+      length = 0;
+      last = "operator";
+      };
+    };
     a += 1;
   };
   out[index] = {"value": input.substring(a - (length + 1), a), "type": last};
