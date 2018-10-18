@@ -4,8 +4,9 @@ function spl(input) {
   let oper = ["+", "-", "*", "/", "^"];
   let operp = {"+": 2, "-": 2, "*": 1, "/": 1, "^": 0}; // order of opeations
   let oper2 = ["sin", "cos", "tan", "floor", "ceiling"];
+  let equal = ["="]
   let variable = ["x", "y"]
-  let out = {};
+  let out = [];
   let a = 0; //counter for which character you're on
   let index = 0;
   let length;
@@ -19,7 +20,7 @@ function spl(input) {
           out[index] = {"value": input.substring(a - ( length + 1), a), "type": last};
         };
         if (last == "operator") {
-          out[index].p = "0";
+          out[index].p = oper2[out[index].value];
         };
         index += 1;
         length = 0;
@@ -28,12 +29,25 @@ function spl(input) {
     };
     if (variable.indexOf(input[a]) > -1) {
       out[index] = {"value": input.substring(a - ( length + 1), a), "type": last};
-      if (last == "operator") {
+      if (last !== "operator"){
+        index += 1;
+        out[index] = {"value": "*", "type": "operator", "p": 1};
+      }
+      else {
         out[index].p = "0";
       };
       index += 1;
       length = 0;
       last = "variable";
+    };
+    if (equal.indexOf(input[a]) > -1) {
+      out[index] = {"value": input.substring(a - ( length + 1), a), "type": last};
+      if (last == "operator") {
+        out[index].p = "0";
+      };
+      index += 1;
+      length = 0;
+      last = "equal";
     };
     if (oper.indexOf(input[a]) > -1) {
       if (last !== ""){
@@ -45,7 +59,6 @@ function spl(input) {
       index += 1;
       length = 0;
       last = "operator";
-      };
     };
     a += 1;
   };
@@ -53,8 +66,7 @@ function spl(input) {
   if (last == "operator") {
     out[index].p = "0";
   };
-  out.l = index;
-  return (out);
+  return out;
 };
 
 function step(inp) {
@@ -70,19 +82,19 @@ function step(inp) {
   let found = false;
   let p;
   let pindex;
-  while (found !== true) {
+  for (index=1; index < it.length; index++) {
     if (it[index].type == "operator" && it[index - 1].type !== "variable" && it[index + 1].type !== "variable") {
       if (it[index].p > p) {
         p = it[index].p;
         pindex = index;
       };
     };
-    if (index == it.l) {
+    if (index >= it.length) {
       found = true;
     };
-    index += 1;
   };
-  it[index].value == oprs[it[index].value](it[index-1]);
-  it[index-1].type = "dead";
-  it[index+1].type = "dead";
+  it[pindex].value == oprs[it[pindex].value](it[pindex-1].value, it[pindex+1].value);
+  delete it[pindex-1];
+  delete it[pindex+1];
+  return oprs;
 };
